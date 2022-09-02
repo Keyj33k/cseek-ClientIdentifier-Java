@@ -18,43 +18,43 @@ public class IPHunt extends Hunt {
 		Date currentDate = new Date();
 		long timerStart = System.currentTimeMillis();
 
-        System.out.printf("\nstart scanning at %s\n\n", currentDate);
+        	System.out.printf("\nstart scanning at %s\n\n", currentDate);
 
-        for(int octet = startOctet; octet < endOctet + 1; octet++) {
-        	BufferedWriter outputWriter = null;
+        	for(int octet = startOctet; octet < endOctet + 1; octet++) {
+        		BufferedWriter outputWriter = null;
         	
-            try {
-                String pingAddr = String.format("%s.%d", ipAddress, octet);
-                outputWriter = new BufferedWriter(new FileWriter("output/nethuntResults.txt", true));
+            		try {
+                		String pingAddr = String.format("%s.%d", ipAddress, octet);
+                		outputWriter = new BufferedWriter(new FileWriter("output/nethuntResults.txt", true));
                 
-                if(InetAddress.getByName(pingAddr).isReachable(1000)) {
-                	System.out.printf("%s, connected successfully\n", pingAddr);
+                		if(InetAddress.getByName(pingAddr).isReachable(1000)) {
+                			System.out.printf("%s, connected successfully\n", pingAddr);
                 	
-                	outputWriter.write(String.format("%s, connected successfully, %s\n", pingAddr, currentDate));
+                			outputWriter.write(String.format("%s, connected successfully, %s\n", pingAddr, currentDate));
                 	
-                	isReachable = true;
-                } else {
-                	System.out.printf("%s, connection failed\n", pingAddr);
+                			isReachable = true;
+                		} else {
+                			System.out.printf("%s, connection failed\n", pingAddr);
                 	
-                	isReachable = false;
-                }
+                			isReachable = false;
+                		}
                 
-                if(portScan != false) {
-                	if(isReachable == true) {
-                		scanPorts(minPort, maxPort, octet);
-                	}
-                }
-            } catch(UnknownHostException exc) {
-                System.out.printf("Host (%s) not known\n", ipAddress);
-            } finally {
-            	outputWriter.close();
-            }
-        }
+                		if(portScan != false) {
+                			if(isReachable == true) {
+                				scanPorts(minPort, maxPort, octet);
+                			}
+                		}
+            		} catch(UnknownHostException exc) {
+                		System.out.printf("Host (%s) not known\n", ipAddress);
+            		} finally {
+            			outputWriter.close();
+            		}
+        	}
         
-        long timerEnd = System.currentTimeMillis();
-        long timerFinal = timerEnd - timerStart;
+        	long timerEnd = System.currentTimeMillis();
+        	long timerFinal = timerEnd - timerStart;
         
-        System.out.printf("\nscan done, needed time: %dms\n", timerFinal);
+        	System.out.printf("\nscan done, needed time: %dms\n", timerFinal);
 	}
 }
 
