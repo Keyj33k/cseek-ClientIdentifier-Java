@@ -21,7 +21,7 @@ public class NetHunt {
 		this.ipAddress = ipAddress;
 	}
 	
-	private void ClearConsole() {
+	private void clearConsole() {
 		try {
 			if(System.getProperty("os.name").contains("Windows")) {	
 				ProcessBuilder builder = new ProcessBuilder("cls");
@@ -122,7 +122,7 @@ public class NetHunt {
 				if(option.length() != 1) {
 					System.out.println("\njust one character is necessary");
 				} else if(option.equals("y") || option.equals("Y")) {
-					netHunt.ClearConsole();
+					netHunt.clearConsole();
 					break;
 				} else if(option.equals("n") || option.equals("N")) {
 					System.out.printf("\ngoodbye, %s\n", System.getProperty("user.name"));
