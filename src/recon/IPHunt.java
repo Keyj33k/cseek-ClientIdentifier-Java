@@ -21,12 +21,10 @@ public class IPHunt extends Hunt {
         	System.out.printf("\nstart scanning at %s\n\n", currentDate);
 
         	for(int octet = startOctet; octet < endOctet + 1; octet++) {
-        		BufferedWriter outputWriter = null;
+        		BufferedWriter outputWriter = new BufferedWriter(new FileWriter("output/nethuntResults.txt", true));
+        		String pingAddr = String.format("%s.%d", ipAddress, octet);
         	
             		try {
-                		String pingAddr = String.format("%s.%d", ipAddress, octet);
-                		outputWriter = new BufferedWriter(new FileWriter("output/nethuntResults.txt", true));
-                
                 		if(InetAddress.getByName(pingAddr).isReachable(1000)) {
                 			System.out.printf("%s, connected successfully\n", pingAddr);
                 	
@@ -39,12 +37,12 @@ public class IPHunt extends Hunt {
                 			isReachable = false;
                 		}
                 
-                		if(portScan != false) {
+               			if(portScan != false) {
                 			if(isReachable == true) {
                 				scanPorts(minPort, maxPort, octet);
                 			}
                 		}
-            		} catch(UnknownHostException exc) {
+           		} catch(UnknownHostException exc) {
                 		System.out.printf("Host (%s) not known\n", ipAddress);
             		} finally {
             			outputWriter.close();
