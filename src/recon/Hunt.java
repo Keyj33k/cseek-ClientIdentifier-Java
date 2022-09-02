@@ -18,7 +18,7 @@ public class Hunt {
 	
 	public static String possibleServices(int port) {
 		if(port == 20 || port == 21) {
-			possibleService = String.format("\t\tport %d, possible FTP service detected!\n", port);
+			possibleService = String.format("\t\tport %d, possible FTP service detected!", port);
 		} else if(port == 22) {
 			possibleService = "\t\tport 22, possible SSH service detected!";
 		} else if(port == 23) {
@@ -36,30 +36,28 @@ public class Hunt {
 		return possibleService;
 	}
 	
-	public void scanPorts(int minPort, int maxPort, int lastOctet) {
-		try {
-			for(int port = minPort; port < maxPort + 1; port++) {
-				try {
-					BufferedWriter writer = new BufferedWriter(new FileWriter("output/nethuntResults.txt", true));
-					Socket socket = new Socket();
-				
-					socket.connect(new InetSocketAddress(this.ipAddress, port));
-					socket.close();
+	public void scanPorts(int minPort, int maxPort, int lastOctet) throws IOException {
+		for(int port = minPort; port < maxPort + 1; port++) {
+			BufferedWriter writer = new BufferedWriter(new FileWriter("output/nethuntResults.txt", true));
+			Socket socket = new Socket();
+			
+			try {
+				socket.connect(new InetSocketAddress(this.ipAddress, port));
 					
-					System.out.printf("\t%s.%d, port %d, status: open\n", this.ipAddress, lastOctet, port);
-					System.out.println(possibleServices(port));
+				System.out.printf("\t%s.%d, port %d, status: open\n", this.ipAddress, lastOctet, port);
+				System.out.println(possibleServices(port));
 					
-					writer.write(String.format("\t%s.%d, port %d, status: open\n", this.ipAddress, lastOctet, port));
-					writer.write(possibleServices(port));
-					writer.close();
-				} catch(ConnectException exc) {
-					System.out.printf("\t%s.%d, port %d, status: closed\n", this.ipAddress, lastOctet, port);
-				} catch(SocketException exc) {
-					System.out.printf("\t%s.%d, port %d, status: closed\n", this.ipAddress, lastOctet, port);
-				}
+				writer.write(String.format("\t%s.%d, port %d, status: open\n", this.ipAddress, lastOctet, port));
+				writer.write(possibleServices(port) + "\n");
+			} catch(ConnectException exc) {
+				System.out.printf("\t%s.%d, port %d, status: closed\n", this.ipAddress, lastOctet, port);
+			} catch(SocketException exc) {
+				System.out.printf("\t%s.%d, port %d, status: closed\n", this.ipAddress, lastOctet, port);
+			} finally {
+				socket.close();
+				writer.close();
 			}
-		} catch(IOException exc) {
-			exc.printStackTrace();
 		}
 	}
 }
+
