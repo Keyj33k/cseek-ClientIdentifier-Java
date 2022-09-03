@@ -12,7 +12,7 @@ public class IPHunt extends Hunt {
 		super(ipAddress);
 	}
 
-	private boolean isReachable;
+	private boolean isAddressReachable;
 	
 	public void addressReachability(int startOctet, int endOctet, int minPort, int maxPort, boolean portScan) throws IOException {
 		Date currentDate = new Date();
@@ -30,15 +30,15 @@ public class IPHunt extends Hunt {
                 	
                 			outputWriter.write(String.format("%s, connected successfully, %s\n", pingAddr, currentDate));
                 	
-                			isReachable = true;
+                			isAddressReachable = true;
                 		} else {
                 			System.out.printf("%s, connection failed\n", pingAddr);
                 	
-                			isReachable = false;
+                			isAddressReachable = false;
                 		}
                 
                			if(portScan != false) {
-                			if(isReachable == true) {
+                			if(isAddressReachable == true) {
                 				scanPorts(minPort, maxPort, octet);
                 			}
                 		}
