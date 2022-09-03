@@ -21,19 +21,13 @@ public class NetHunt {
 		this.ipAddress = ipAddress;
 	}
 	
-	private void clearConsole() {
-		try {
-			if(System.getProperty("os.name").contains("Windows")) {	
-				ProcessBuilder builder = new ProcessBuilder("cls");
-				builder.inheritIO().start().waitFor();
-			} else {
-				ProcessBuilder builder = new ProcessBuilder("clear");
-				builder.inheritIO().start().waitFor();
-			}
-		} catch (InterruptedException exc) {
-			exc.printStackTrace();
-		} catch (IOException exc) {
-			exc.printStackTrace();
+	private void clearConsole() throws IOException, InterruptedException {
+		if(System.getProperty("os.name").contains("Windows")) {	
+			ProcessBuilder builder = new ProcessBuilder("cls");
+			builder.inheritIO().start().waitFor();
+		} else {
+			ProcessBuilder builder = new ProcessBuilder("clear");
+			builder.inheritIO().start().waitFor();
 		}
 	}
 	
