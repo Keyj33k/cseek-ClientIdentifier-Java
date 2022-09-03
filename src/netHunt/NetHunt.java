@@ -87,7 +87,6 @@ public class NetHunt {
 		try {
 			if(args.length != 4 || args[0].split("\\.").length != 3 || !args[3].matches("true|false")) {
 				syntaxInfo();
-				System.exit(1);
 			}
 			
 			NetHunt netHunt = new NetHunt(args[0]);
