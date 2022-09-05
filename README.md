@@ -50,7 +50,7 @@ java -jar NetHunt.jar <ipv4Addr(First Three Octets Only)> <minHost> <maxHost> <u
 
 <div align="center">
 
-### Tested on 5.15.0-46-generic-Ubuntu 
+### Tested on 5.15.0-47-generic-Ubuntu 
 
 </div>
 
