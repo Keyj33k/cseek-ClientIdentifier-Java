@@ -57,11 +57,11 @@ public class NetHunt {
 			int secondOctet = Integer.parseInt(extractOctet.getOctet(this.ipAddress, 1));
 			int thirdOctet = Integer.parseInt(extractOctet.getOctet(this.ipAddress, 2));
 
-            		if(firstOctet < 0 || firstOctet >= 253) {
+            		if(firstOctet <= 0 || firstOctet >= 253) {
                			throw new InvalidOctetException(String.format("octet one (%d) is invalid.", firstOctet));
-            		} else if(secondOctet < 0 || secondOctet >= 253) {
+            		} else if(secondOctet <= 0 || secondOctet >= 253) {
             			throw new InvalidOctetException(String.format("octet two (%d) is invalid.", secondOctet));
-            		} else if(thirdOctet < 0 || thirdOctet >= 253) {
+            		} else if(thirdOctet <= 0 || thirdOctet >= 253) {
             			throw new InvalidOctetException(String.format("octet three (%d) is invalid.", thirdOctet));
             		}
         	} catch(ArrayIndexOutOfBoundsException exc) {
@@ -74,9 +74,9 @@ public class NetHunt {
 	private void portCheck(int minPort, int maxPort) {
 		if(minPort > maxPort) {
 			throw new InvalidConfigException();
-		} else if(minPort >= 65533 || minPort < 0) {
+		} else if(minPort >= 65533 || minPort <= 0) {
 			throw new InvalidConfigException(String.format("port %d is invalid", minPort));
-		} else if(maxPort >= 65534 || maxPort < 0) {
+		} else if(maxPort >= 65534 || maxPort <= 0) {
 			throw new InvalidConfigException(String.format("port %d is invalid", maxPort));
 		}
 	}
