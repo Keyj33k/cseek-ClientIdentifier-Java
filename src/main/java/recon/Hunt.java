@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.net.ConnectException;
 import java.net.SocketException;
 
-public class Hunt {
+abstract class Hunt {
 	protected String ipAddress;
 	private static String possibleService;
 	
