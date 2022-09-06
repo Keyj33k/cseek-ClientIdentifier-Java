@@ -50,7 +50,7 @@ java -jar NetHunt.jar <ipv4Addr(First Three Octets Only)> <minHost> <maxHost> <u
 ## 🎬 NetHunt Demo
 <div align="center">
   
-![banner](https://github.com/Keyj33k/NetHunt/blob/main/img/netHuntDemo.gif?raw=true)
+![demo](https://github.com/Keyj33k/NetHunt/blob/main/img/newHuntDemo.gif?raw=true)
   
 </div>
 
