@@ -37,10 +37,8 @@ public class IPHunt extends Hunt {
                 			isAddressReachable = false;
                 		}
                 
-               			if(portScan != false) {
-                			if(isAddressReachable == true) {
-                				scanPorts(minPort, maxPort, octet);
-                			}
+               			if(portScan != false && isAddressReachable == true) {
+                			scanPorts(minPort, maxPort, octet);
                 		}
            		} catch(UnknownHostException exc) {
                 		System.out.printf("Host (%s) not known\n", ipAddress);
