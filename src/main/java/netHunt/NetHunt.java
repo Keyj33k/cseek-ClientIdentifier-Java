@@ -132,6 +132,9 @@ public class NetHunt {
 				int maxPort = userInput.nextInt();
 				
 				netHunt.portCheck(minPort, maxPort);
+				
+				System.out.println("\nport scanning option set to true, the process may take some time ...");
+				
 				ipHunt.addressReachability(minHost, maxHost, minPort, maxPort, true);
 			} else {
 				ipHunt.addressReachability(minHost, maxHost, 0, 0, false);
