@@ -46,6 +46,14 @@ java -jar NetHunt.jar <ipv4Addr(First Three Octets Only)> <minHost> <maxHost> <u
 ```
 ### :memo: The Output Will Be Stored In A Text File: `/output/nethuntResults.txt`
 
+
+## 🎬 NetHunt Demo
+<div align="center">
+  
+![banner](https://github.com/Keyj33k/NetHunt/blob/main/img/netHuntDemo.gif?raw=true)
+  
+</div>
+
 ---
 
 <div align="center">
