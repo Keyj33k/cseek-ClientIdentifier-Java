@@ -16,7 +16,7 @@ public class Hunt {
 		this.ipAddress = ipAddress;
 	}
 	
-	public static String possibleServices(int port) {
+	private static String possibleServices(int port) {
 		if(port == 20 || port == 21) {
 			possibleService = String.format("\t\tport %d, possible FTP service detected!", port);
 		} else if(port == 22) {
