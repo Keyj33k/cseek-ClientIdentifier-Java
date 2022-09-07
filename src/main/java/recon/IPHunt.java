@@ -22,7 +22,7 @@ public class IPHunt extends Hunt {
 
         	for(int octet = startOctet; octet < endOctet + 1; octet++) {
         		BufferedWriter outputWriter = new BufferedWriter(new FileWriter("output/nethuntResults.txt", true));
-        		String pingAddr = String.format("%s.%d", ipAddress, octet);
+        		String pingAddr = String.format("%s.%d", ipAddress, octet); // build the target ipv4 address
         	
             		try {
                 		if(InetAddress.getByName(pingAddr).isReachable(1000)) {
