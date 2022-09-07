@@ -11,7 +11,7 @@ import java.net.SocketException;
 abstract class Hunt {
 	public String ipAddress;
 	private static String possibleService;
-	private static int portStatusCount = 0;
+	private static int portStatusCount;
 	
 	public Hunt(String ipAddress) {
 	 	this.ipAddress = ipAddress;
@@ -51,15 +51,15 @@ abstract class Hunt {
 	 * 
 	 */
 	public void scanPorts(int minPort, int maxPort, int lastOctet) throws IOException {
-		int hostsToScan = maxPort - minPort + 1;
+		int portsToScan = maxPort - minPort;
 		
-		for(int port = minPort; port < maxPort + 1; port++) {
+		for(int port = minPort; port < maxPort; port++) {
 			BufferedWriter writer = new BufferedWriter(new FileWriter("output/nethuntResults.txt", true));
 			String targetAddress = String.format("%s.%d", this.ipAddress, lastOctet);
 			Socket socket = new Socket();
 			
 			try {
-				socket.connect(new InetSocketAddress(targetAddress, port));
+				socket.connect(new InetSocketAddress(targetAddress, port));	
 				System.out.printf("\t%s, port %d, status: open\n", targetAddress, port);
 				
 				possibleServices(port);
@@ -67,20 +67,21 @@ abstract class Hunt {
 				writer.write(String.format("\t%s, port %d, status: open\n", targetAddress, port));
 				writer.write(possibleServices(port) + "\n");
 			} catch(ConnectException exc) {
-				portStatusCount += 1;
+				portStatusCount++;
 			} catch(SocketException exc) {
-				portStatusCount += 1;
+				portStatusCount++;
 			} finally {
 				socket.close();
 				writer.close();
 			}
 		}
 		
-		if(hostsToScan == portStatusCount) {
-			System.out.printf("\tport scan done => %d ports scanned, all scanned ports are closed\n", hostsToScan);
+		if(portsToScan == portStatusCount) {
+			System.out.printf("\tport scan done => %d ports scanned, all scanned ports are closed\n", portsToScan);
 		} else {
-			System.out.printf("\tport scan done => %d ports scanned, %d ports are closed\n", hostsToScan, portStatusCount);
+			System.out.printf("\tport scan done => %d ports scanned, %d ports are closed\n", portsToScan, portStatusCount);
 		}
 	}
 }
+
 
