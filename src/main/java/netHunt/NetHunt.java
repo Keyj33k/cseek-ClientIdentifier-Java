@@ -3,7 +3,6 @@ package netHunt;
 import java.util.Scanner;
 import java.util.logging.Logger;
 import java.lang.NumberFormatException;
-import java.time.LocalTime;
 import java.lang.ArrayIndexOutOfBoundsException;
 import java.util.InputMismatchException;
 import java.io.File;
@@ -91,10 +90,8 @@ public class NetHunt {
 				syntaxInfo();
 			}
 
-			// custom keyboard interrupt handling 
-			Runtime.getRuntime().addShutdownHook(new Thread(() -> { 
-				System.out.printf("\nnethunt scan canceled: exit at %s\n", LocalTime.now().toString()); 
-			}));
+			// custom interrupt handling 
+			Runtime.getRuntime().addShutdownHook(new Thread(() -> { System.out.println("\nnethunt done, exit"); }));
 			
 			NetHunt netHunt = new NetHunt(args[0]);
 			IPHunt ipHunt = new IPHunt(args[0]);
