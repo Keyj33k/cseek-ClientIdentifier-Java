@@ -50,7 +50,7 @@ public class IPHunt extends Hunt {
         	long timerEnd = System.currentTimeMillis();
         	long timerFinal = timerEnd - timerStart;
         
-        	System.out.printf("\nscan done, needed time: %dms\n", timerFinal);
+        	System.out.printf("\nscan finished, needed time: %dms\n", timerFinal);
 	}
 }
 
