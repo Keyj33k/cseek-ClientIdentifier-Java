@@ -62,7 +62,7 @@ abstract class Hunt {
 			}
 		}
 		
-		if(hostsToScan == portStatusCount) {
+		if(hostsToScan == portStatusCount) { // compare the results to adjust the output
 			System.out.printf("\tport scan done => %d ports scanned, all scanned ports are closed\n", hostsToScan);
 		} else {
 			System.out.printf("\tport scan done => %d ports scanned, %d ports are closed\n", hostsToScan, portStatusCount);
