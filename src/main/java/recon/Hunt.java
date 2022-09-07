@@ -41,7 +41,8 @@ abstract class Hunt {
 	 * 
 	 * This method scans (if enabled) the current target address for 
 	 * open ports and also provides information when a specific, most 
-	 * vulnerable port is open. The results are also saved in the output file.
+	 * vulnerable port is open (using the possibleServices method).
+	 * The results are also saved in the output file.
 	 * 
 	 * @param minPort		defines the start port to scan
 	 * @param maxPort		defines the start last to scan
