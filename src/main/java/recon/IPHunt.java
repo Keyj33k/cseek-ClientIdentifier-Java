@@ -16,7 +16,7 @@ public class IPHunt extends Hunt {
 	
 	/**
 	 * 
-	 * This method will build the target ipv4 address and after the connectivity check
+	 * addressReachability will build the target ipv4 address and after the connectivity check
 	 * it will write all addresses with status success to the output file.
 	 * 
 	 * @param startOctet		used to define the start address
