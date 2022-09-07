@@ -3,6 +3,7 @@ package netHunt;
 import java.util.Scanner;
 import java.util.logging.Logger;
 import java.lang.NumberFormatException;
+import java.time.LocalTime;
 import java.lang.ArrayIndexOutOfBoundsException;
 import java.util.InputMismatchException;
 import java.io.File;
@@ -36,7 +37,7 @@ public class NetHunt {
 			.append("NetHunt - Version 0.0.3\n")
 			.append("------------------------\n\n")
 			.append("syntax: \t java -jar NetHunt.jar <ipv4Addr(First Three Octets Only)> <minHost> <maxHost> <portScanOption>\n\n")
-			.append("example:\t java -jar NetHunt.jar 192.168.2 1 5 true")
+			.append("example:\t java -jar NetHunt.jar 192.168.2 1 5 true\n")
 		);
 		
 		System.exit(1);
@@ -51,6 +52,7 @@ public class NetHunt {
 	
 	private void octetCheck() {
 		try {
+			// disassemble the ip address and check the correctness of the individual octets
 			AddressHandling extractOctet = (String address, int octet) -> { return address.split("\\.")[octet]; };
 			
 			int firstOctet = Integer.parseInt(extractOctet.getOctet(this.ipAddress, 0));
@@ -88,6 +90,11 @@ public class NetHunt {
 			if(args.length != 4 || args[0].split("\\.").length != 3 || !args[3].matches("true|false")) {
 				syntaxInfo();
 			}
+
+			// custom keyboard interrupt handling 
+			Runtime.getRuntime().addShutdownHook(new Thread(() -> { 
+				System.out.printf("\nnethunt scan canceled: exit at %s\n", LocalTime.now().toString()); 
+			}));
 			
 			NetHunt netHunt = new NetHunt(args[0]);
 			IPHunt ipHunt = new IPHunt(args[0]);
@@ -125,7 +132,7 @@ public class NetHunt {
 				}
 			}
 			
-			if(!args[3].equals("false")) {
+			if(!args[3].equals("false")) { // activate port scan
 				System.out.print("<minPort> <maxPort>: ");
 				
 				int minPort = userInput.nextInt();
@@ -144,7 +151,7 @@ public class NetHunt {
 		} catch(ArrayIndexOutOfBoundsException exc) {
 			syntaxInfo();
 		} catch(InputMismatchException exc) {
-			throw new InvalidConfigException();
+			throw new InvalidConfigException();	
 		} finally {
 			userInput.close();
 		}
