@@ -37,20 +37,34 @@ abstract class Hunt {
 		return possibleService;
 	}
 	
+	/**
+	 * 
+	 * This method scans (if enabled) the current target address for 
+	 * open ports and also provides information when a specific, most 
+	 * vulnerable port is open. The results are also saved in the output file.
+	 * 
+	 * @param minPort		defines the start port to scan
+	 * @param maxPort		defines the start last to scan
+	 * @param lastOctet		used to create the current target address 
+	 * @throws IOException		necessary for the saved output (writing to the 
+	 * 				output file) and for the socket creation
+	 * 
+	 */
 	public void scanPorts(int minPort, int maxPort, int lastOctet) throws IOException {
 		int hostsToScan = maxPort - minPort + 1;
 		
 		for(int port = minPort; port < maxPort + 1; port++) {
 			BufferedWriter writer = new BufferedWriter(new FileWriter("output/nethuntResults.txt", true));
+			String targetAddress = String.format("%s.%d", this.ipAddress, lastOctet);
 			Socket socket = new Socket();
 			
 			try {
-				socket.connect(new InetSocketAddress(this.ipAddress, port));
-					
-				System.out.printf("\t%s.%d, port %d, status: open\n", this.ipAddress, lastOctet, port);
+				socket.connect(new InetSocketAddress(targetAddress, port));
+				System.out.printf("\t%s, port %d, status: open\n", targetAddress, port);
+				
 				possibleServices(port);
 					
-				writer.write(String.format("\t%s.%d, port %d, status: open\n", this.ipAddress, lastOctet, port));
+				writer.write(String.format("\t%s, port %d, status: open\n", targetAddress, port));
 				writer.write(possibleServices(port) + "\n");
 			} catch(ConnectException exc) {
 				portStatusCount += 1;
@@ -62,7 +76,7 @@ abstract class Hunt {
 			}
 		}
 		
-		if(hostsToScan == portStatusCount) { // compare the results to adjust the output
+		if(hostsToScan == portStatusCount) {
 			System.out.printf("\tport scan done => %d ports scanned, all scanned ports are closed\n", hostsToScan);
 		} else {
 			System.out.printf("\tport scan done => %d ports scanned, %d ports are closed\n", hostsToScan, portStatusCount);
