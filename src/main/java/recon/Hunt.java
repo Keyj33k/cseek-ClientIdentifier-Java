@@ -45,7 +45,7 @@ abstract class Hunt {
 	 * The results are also saved in the output file.
 	 * 
 	 * @param minPort		defines the start port to scan
-	 * @param maxPort		defines the start last to scan
+	 * @param maxPort		defines the last port to scan
 	 * @param lastOctet		used to create the current target address 
 	 * @throws IOException		necessary for the saved output (writing to the 
 	 * 				output file) and for the socket creation
