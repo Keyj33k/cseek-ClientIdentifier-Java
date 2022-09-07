@@ -14,6 +14,20 @@ public class IPHunt extends Hunt {
 
 	private boolean isAddressReachable;
 	
+	/**
+	 * 
+	 * This method will build the target ipv4 address and after the connectivity check
+	 * it will write all addresses with status success to the output file.
+	 * 
+	 * @param startOctet		used to define the start address
+	 * @param endOctet		used to define the last address
+	 * @param minPort		if the port scan equals true, it defines the start port
+	 * @param maxPort		if the port scan equals true, it defines the last port
+	 * @param portScan		used to activate or deactivate the port scan
+	 * @throws IOException		necessary for the connectivity check, the output file writer
+	 * 				and the port scanning option
+	 * 
+	 */
 	public void addressReachability(int startOctet, int endOctet, int minPort, int maxPort, boolean portScan) throws IOException {
 		Date currentDate = new Date();
 		long timerStart = System.currentTimeMillis();
