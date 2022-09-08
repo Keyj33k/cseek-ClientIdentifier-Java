@@ -40,15 +40,16 @@ abstract class Hunt {
 	/**
 	 * 
 	 * scanPorts scans (if enabled) the current target address for 
-	 * open ports and also provides information when a specific, most 
-	 * vulnerable port is open (using the possibleServices method).
-	 * The results are also saved in the output file.
+	 * open ports using the socket class and provides information
+	 * when a specific, most vulnerable port is open 
+	 * (using the possibleServices method). The results will 
+	 * be saved in the output file.
 	 * 
-	 * @param minPort		defines the start port to scan
-	 * @param maxPort		defines the last port to scan
-	 * @param lastOctet		used to create the current target address 
-	 * @throws IOException		necessary for the saved output (writing to the 
-	 * 				output file) and for the socket creation
+	 * @param minPort		defines where the port scanner need to start
+	 * @param maxPort		defines the maximum port where the scan will end 
+	 * @param lastOctet		extend the 24 bit value to a valid ipv4 address 
+	 * @throws IOException		throws when processes like saving the output 
+	 * 				or the socket creation fails
 	 * 
 	 */
 	public void scanPorts(int minPort, int maxPort, int lastOctet) throws IOException {
