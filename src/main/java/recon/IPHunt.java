@@ -16,16 +16,17 @@ public class IPHunt extends Hunt {
 	
 	/**
 	 * 
-	 * addressReachability will build the target ipv4 address and after the connectivity check
-	 * it will write all addresses with status success to the output file.
+	 * addressReachability builds the target ipv4 address and use the isReachable 
+	 * method to check the connectivity of these address. All 
+	 * addresses with status success will be written to the output file.
 	 * 
-	 * @param startOctet		used to define the start address
-	 * @param endOctet		used to define the last address
-	 * @param minPort		if the port scan equals true, it defines the start port
-	 * @param maxPort		if the port scan equals true, it defines the last port
+	 * @param startOctet		defines the start address using the last octet 
+	 * @param endOctet		defines the last address to scan using the last octet
+	 * @param minPort		defines the start port
+	 * @param maxPort		defines the last port
 	 * @param portScan		used to activate or deactivate the port scan
-	 * @throws IOException		necessary for the connectivity check, the output file writer
-	 * 				and the port scanning option
+	 * @throws IOException		throws when actions like the connectivity check, the output file writer
+	 * 				or the port scanning option fails
 	 * 
 	 */
 	public void addressReachability(int startOctet, int endOctet, int minPort, int maxPort, boolean portScan) throws IOException {
