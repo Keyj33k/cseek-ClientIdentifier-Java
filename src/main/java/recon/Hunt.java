@@ -41,7 +41,7 @@ abstract class Hunt {
 	 * 
 	 * scanPorts scans (if enabled) the current target address for 
 	 * open ports using the socket class and provides information
-	 * when a specific, most vulnerable port is open 
+	 * when a specific, most vulnerable port accepts the request 
 	 * (using the possibleServices method). The results will 
 	 * be saved in the output file.
 	 * 
