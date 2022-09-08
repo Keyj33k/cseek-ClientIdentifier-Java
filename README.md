@@ -65,11 +65,3 @@ java -jar NetHunt.jar <ipv4Addr(First Three Octets Only)> <minHost> <maxHost> <u
 ---
 
 
-<div id="badges" align="center">
-  
-   ### :rocket: Follow for more on Twitter:
-  
-  <a href="https://twitter.com/Keyj33k/media">
-    <img src="https://img.shields.io/badge/Twitter-blue?style=for-the-badge&logo=twitter&logoColor=white" alt="Twitter Badge"/>
-  </a>
-</div>
