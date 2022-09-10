@@ -11,7 +11,6 @@ public class IPHunt extends Hunt {
 	public IPHunt(String ipAddress) {
 		super(ipAddress);
 	}
-
 	private boolean isAddressReachable;
 	
 	/**
@@ -37,29 +36,28 @@ public class IPHunt extends Hunt {
 
         	for(int octet = startOctet; octet < endOctet + 1; octet++) {
         		BufferedWriter outputWriter = new BufferedWriter(new FileWriter("output/nethuntResults.txt", true));
-        		String pingAddr = String.format("%s.%d", ipAddress, octet); // build the target ipv4 address
+        		String pingAddr = String.format("%s.%d", ipAddress, octet);
+        		InetAddress inetAddress = InetAddress.getByName(pingAddr);
         	
             		try {
-                		if(InetAddress.getByName(pingAddr).isReachable(1000)) {
-                			System.out.printf("%s, connected successfully\n", pingAddr);
-                	
-                			outputWriter.write(String.format("%s, connected successfully, %s\n", pingAddr, currentDate));
-                	
+            			if(inetAddress.isReachable(1000)) {
+                			System.out.printf("%s ( %s ), connected successfully\n", pingAddr, inetAddress.getCanonicalHostName());
+                			outputWriter.write(String.format(
+                				"%s ( %s ), connected successfully, %s\n", pingAddr, 
+                				inetAddress.getCanonicalHostName(), currentDate
+                			));
                 			isAddressReachable = true;
                 		} else {
                 			System.out.printf("%s, connection failed\n", pingAddr);
-                	
                 			isAddressReachable = false;
-                		}
-                
-               			if(portScan != false && isAddressReachable == true) {
-                			scanPorts(minPort, maxPort, octet);
                 		}
            		} catch(UnknownHostException exc) {
                 		System.out.printf("Host (%s) not known\n", ipAddress);
             		} finally {
             			outputWriter.close();
             		}
+            		
+            		if(portScan != false && isAddressReachable == true) scanPorts(minPort, maxPort, octet);
         	}
         
         	long timerEnd = System.currentTimeMillis();
