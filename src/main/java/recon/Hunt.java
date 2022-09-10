@@ -63,11 +63,10 @@ abstract class Hunt {
 			try {
 				socket.connect(new InetSocketAddress(targetAddress, port));	
 				System.out.printf("\t%s, port %d, status: open\n", targetAddress, port);
-				
-				possibleServices(port);
-					
+				possibleServices(port);	
 				writer.write(String.format("\t%s, port %d, status: open\n", targetAddress, port));
-				writer.write(possibleServices(port) + "\n");
+				
+				if(possibleServices(port) != null) writer.write(possibleServices(port) + "\n");
 			} catch(ConnectException exc) {
 				portStatusCount++;
 			} catch(SocketException exc) {
@@ -85,5 +84,6 @@ abstract class Hunt {
 		}
 	}
 }
+
 
 
