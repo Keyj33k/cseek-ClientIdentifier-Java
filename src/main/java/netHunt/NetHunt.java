@@ -95,12 +95,12 @@ public class NetHunt {
 			
 			NetHunt netHunt = new NetHunt(args[0]);
 			IPHunt ipHunt = new IPHunt(args[0]);
-			
 			int minHost = Integer.parseInt(args[1]);
 			int maxHost = Integer.parseInt(args[2]);
 			
 			if(minHost > maxHost || minHost <= 0 || minHost >= 253 || maxHost <= 0 || maxHost >= 253) throw new InvalidConfigException();
 			
+			System.out.println("NetHunt - Version 0.0.3\n");
 			netHunt.octetCheck();
 			Thread.sleep(500);
 			netHunt.outputFileCheck();
@@ -136,9 +136,7 @@ public class NetHunt {
 				int maxPort = userInput.nextInt();
 				
 				netHunt.portCheck(minPort, maxPort);
-				
 				System.out.println("\nport scanning option set to true, the process may take some time ...");
-				
 				ipHunt.addressReachability(minHost, maxHost, minPort, maxPort, true);
 			} else {
 				ipHunt.addressReachability(minHost, maxHost, 0, 0, false);
