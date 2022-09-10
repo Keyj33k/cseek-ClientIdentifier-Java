@@ -76,9 +76,7 @@ public class NetHunt {
 		Scanner userInput = new Scanner(System.in);
 		
 		try {
-			if(args.length != 4 || args[0].split("\\.").length != 3 || !args[3].matches("true|false")) {
-				syntaxInfo();
-			}
+			if(args.length != 4 || args[0].split("\\.").length != 3 || !args[3].matches("true|false")) syntaxInfo();
 			
 			// throw custom message at interruption 
 			Runtime.getRuntime().addShutdownHook(new Thread(() -> { System.out.println("\nnethunt done, exit"); }));
