@@ -21,16 +21,6 @@ public class NetHunt {
 		this.ipAddress = ipAddress;
 	}
 	
-	private void clearConsole() throws IOException, InterruptedException {
-		if(System.getProperty("os.name").contains("Windows")) {	
-			ProcessBuilder builder = new ProcessBuilder("cls");
-			builder.inheritIO().start().waitFor();
-		} else {
-			ProcessBuilder builder = new ProcessBuilder("clear");
-			builder.inheritIO().start().waitFor();
-		}
-	}
-	
 	private static final void syntaxInfo() {
 		System.out.println(new StringBuilder()
 			.append("NetHunt - Version 0.0.3\n")
@@ -89,12 +79,13 @@ public class NetHunt {
 			if(args.length != 4 || args[0].split("\\.").length != 3 || !args[3].matches("true|false")) {
 				syntaxInfo();
 			}
-
-			// custom interrupt handling 
+			
+			// throw custom message at interruption 
 			Runtime.getRuntime().addShutdownHook(new Thread(() -> { System.out.println("\nnethunt done, exit"); }));
 			
 			NetHunt netHunt = new NetHunt(args[0]);
 			IPHunt ipHunt = new IPHunt(args[0]);
+			
 			int minHost = Integer.parseInt(args[1]);
 			int maxHost = Integer.parseInt(args[2]);
 			
@@ -119,7 +110,6 @@ public class NetHunt {
 				if(option.length() != 1) {
 					System.out.println("\njust one character is necessary");
 				} else if(option.equals("y") || option.equals("Y")) {
-					netHunt.clearConsole();
 					break;
 				} else if(option.equals("n") || option.equals("N")) {
 					System.out.printf("\ngoodbye, %s\n", System.getProperty("user.name"));
@@ -130,7 +120,7 @@ public class NetHunt {
 			}
 			
 			if(!args[3].equals("false")) { // activate port scan
-				System.out.print("<minPort> <maxPort>: ");
+				System.out.print("\n<minPort> <maxPort>: ");
 				
 				int minPort = userInput.nextInt();
 				int maxPort = userInput.nextInt();
