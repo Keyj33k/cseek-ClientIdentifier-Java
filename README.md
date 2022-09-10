@@ -66,11 +66,12 @@ java -jar NetHunt.jar <ipv4Addr(First Three Octets Only)> <minHost> <maxHost> <u
 </div>
 
 ## My Motivation
-In most cases I used a simple bash script to start the recon session to learn about the network of the current pentest. It's<br> 
-a really good method to getting started, but for bigger ranges it's nearly impossible to keep the overview. If the Bash<br>
-script located active devices, I had to do a port scan on each hosts separately. While this process, the workspace looked very <br>
-messy and the overview was lost quickly. In a nutshell, I wanted to create a tool that would do all these things itself and <br>
-simply save all active devices and their associated open ports to one file. If NetHunt stored the results, I know where i need to begin <br>
+In most cases I used a simple bash script to start the recon session to learn about the network of the <br> 
+current pentest. It's a really good method to getting started, but for bigger ranges it's nearly <br> 
+impossible to keep the overview. If the Bash script located active devices, I had to do a port scan on <br> 
+each hosts separately. While this process, the workspace looked very messy and the overview was lost quickly. <br> 
+In a nutshell, I wanted to create a tool that would do all these things itself and simply save all active <br> 
+devices and their associated open ports to one file. If NetHunt stored the results, I know where i need to begin <br>
 my next steps without loosing much time and keep a clear workspace too. 
 
 ## Feedback And Bug Report
