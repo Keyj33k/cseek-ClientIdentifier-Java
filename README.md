@@ -1,18 +1,18 @@
 <div align="center">
 
-![version](https://img.shields.io/badge/Version-0.0.3-informational?style=flat&logo=&logoColor=white&color=red) ![stars](https://img.shields.io/github/stars/Keyj33k/NetHunt?style=social) ![forks](https://img.shields.io/github/forks/Keyj33k/NetHunt?label=Forks&logo=&logoColor=white&color=blue) ![languages](https://img.shields.io/github/languages/count/Keyj33k/NetHunt?style=social&logo=&logoColor=white&color=blue) ![issues](https://img.shields.io/github/last-commit/Keyj33k/NetHunt?style=flat&logo=&logoColor=white&color=blue) ![platform](https://img.shields.io/badge/Platform-Linux-informational?style=flat&logo=&logoColor=white&color=green) 
-
-</div>
-  
-<div align="center">
-
-# NetHunt 
+# NetHunt :mag:
 
 </div>
 
 <div align="center">
 
-NetHunt - Local network recon tool, ipsweep extension. 
+Local network recon tool: IPSweep With Additional Port Scanning Config. 
+
+</div>
+
+<div align="center">
+
+![version](https://img.shields.io/badge/Version-0.0.3-informational?style=flat&logo=&logoColor=white&color=red) ![stars](https://img.shields.io/github/stars/Keyj33k/NetHunt?style=social) ![forks](https://img.shields.io/github/forks/Keyj33k/NetHunt?label=Forks&logo=&logoColor=white&color=blue) ![languages](https://img.shields.io/github/languages/count/Keyj33k/NetHunt?style=social&logo=&logoColor=white&color=blue) ![issues](https://img.shields.io/github/last-commit/Keyj33k/NetHunt?style=flat&logo=&logoColor=white&color=blue) 
 
 </div>
 
@@ -22,30 +22,41 @@ NetHunt - Local network recon tool, ipsweep extension.
   
 </div>
 
-## :mag: How NetHunt Can Help You
-&emsp;&emsp;- scan address range in local network for active devices<br>
-&emsp;&emsp;- config port scan for live hosts<br>
+## NetHunts Mission
+- scan address range in local network to detect reachable devices<br>
+- optional port scan config for live hosts to work faster and more efficient<br>
+- displays a message when a port is open which is usually vulnerable<br>
+- store succeed results to a file for saving a detailed summary<br>
 
-## :rocket: Getting started: 
+## What's New
+- `bugfix` scanning unedited address<br>
+- `quality fix` formatted results in output file<br>
+- `feature` if possible, displaying the domain of scanned addresses
 
-- Make sure, you have `Java` installed:
+## :rocket: Getting Started: 
+
+1 ) Make sure, you have `Java` installed:
 ```
 java -version
 ```
-- If it isn't installed (Debian/-based):
+2 ) If it isn't installed (Debian/-based):
 ```
 sudo apt-get install openjdk-18-jdk
 ```
-- Clone the repository:
+3 ) Clone the repository:
 ```
 git clone https://github.com/Keyj33k/NetHunt.git
 ```
-- `Run NetHunt` using the following command:
+4 ) `Run NetHunt` using the following command:
 ```
 java -jar NetHunt.jar <ipv4Addr(First Three Octets Only)> <minHost> <maxHost> <usePortScan(true/false)>
 ```
-### :memo: The Output Will Be Stored In A Text File: `/output/nethuntResults.txt`
 
+<div align="center">
+  
+### The Output Will Be Stored In A Text File: `/output/nethuntResults.txt`
+
+</div>
 
 ## 🎬 NetHunt Demo
 <div align="center">
@@ -53,6 +64,42 @@ java -jar NetHunt.jar <ipv4Addr(First Three Octets Only)> <minHost> <maxHost> <u
 ![demo](https://github.com/Keyj33k/NetHunt/blob/main/img/newHuntDemo.gif?raw=true)
   
 </div>
+
+## My Motivation
+In most cases I used a simple bash script to start the recon session to learn about the network of the current pentest. It's<br> 
+a really good method to getting started, but for bigger ranges it's nearly impossible to keep the overview. If the Bash<br>
+script located active devices, I had to do a port scan on each hosts separately. While this process, the workspace looked very <br>
+messy and the overview was lost quickly. In a nutshell, I wanted to create a tool that would do all these things itself and <br>
+simply save all active devices and their associated open ports to one file. If NetHunt stored the results, I know where i need to begin <br>
+my next steps without loosing much time and keep a clear workspace too. 
+
+## Feedback And Bug Report
+
+If you found a bug, or wanna start a discussion, please use ![Github issues](https://github.com/Keyj33k/NetHunt/issues). You are also invited to <br>
+send an email to the following address: `nomotikag33n@gmail.com`
+
+## LICENSE
+```
+Copyright (c) 2022 Keyjeek
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
 
 ---
 
@@ -63,5 +110,7 @@ java -jar NetHunt.jar <ipv4Addr(First Three Octets Only)> <minHost> <maxHost> <u
 </div>
 
 ---
+
+
 
 
