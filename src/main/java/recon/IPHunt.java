@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.time.LocalTime;
 import java.util.Date;
 
 public class IPHunt extends Hunt {
@@ -12,6 +13,7 @@ public class IPHunt extends Hunt {
 		super(ipAddress);
 	}
 	private boolean isAddressReachable;
+	private int hostsCount;
 	
 	/**
 	 * 
@@ -41,14 +43,20 @@ public class IPHunt extends Hunt {
         	
             		try {
             			if(inetAddress.isReachable(1000)) {
-                			System.out.printf("%s ( %s ), connected successfully\n", pingAddr, inetAddress.getCanonicalHostName());
+                			System.out.printf(
+                				"%s ( %s ): connected successfully, cTime=%s\n", pingAddr, 
+                				inetAddress.getCanonicalHostName(), LocalTime.now().toString()
+                			);
                 			outputWriter.write(String.format(
-                				"%s ( %s ), connected successfully, %s\n", pingAddr, 
+                				"%s ( %s ): connected successfully, cTime=%s\n", pingAddr, 
                 				inetAddress.getCanonicalHostName(), currentDate
                 			));
+                			
+                			hostsCount++;
                 			isAddressReachable = true;
                 		} else {
-                			System.out.printf("%s, connection failed\n", pingAddr);
+                			System.out.printf("%s: connection failed, cTime=%s\n", pingAddr, LocalTime.now().toString());
+                	
                 			isAddressReachable = false;
                 		}
            		} catch(UnknownHostException exc) {
@@ -59,11 +67,23 @@ public class IPHunt extends Hunt {
             		
             		if(portScan != false && isAddressReachable == true) scanPorts(minPort, maxPort, octet);
         	}
-        
+        	
+        	// build statistics section
+        	int hostsToScan = endOctet - startOctet + 1;
         	long timerEnd = System.currentTimeMillis();
         	long timerFinal = timerEnd - timerStart;
-        
-        	System.out.printf("\nscan finished, needed time: %dms\n", timerFinal);
+        	int inactiveHosts = endOctet - hostsCount;
+        	int activeHosts = hostsToScan - inactiveHosts;
+        	
+        	if(activeHosts < 0) activeHosts = 0;
+        	
+        	String minHost = String.format("%s.%d", ipAddress, startOctet);
+        	String maxHost = String.format("%s.%d", ipAddress, endOctet);
+        	
+        	System.out.println("\n\n******************* statistics *******************");
+        	System.out.printf(
+        		"total=%d, active=%d, inactive=%d, minHost=%s,\nmaxHost=%s, neededTime=%dms\n", 
+        		hostsToScan, activeHosts, inactiveHosts, minHost, maxHost, timerFinal
+        	);
 	}
 }
-
