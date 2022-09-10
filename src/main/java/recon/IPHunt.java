@@ -72,7 +72,7 @@ public class IPHunt extends Hunt {
         	int hostsToScan = endOctet - startOctet + 1;
         	long timerEnd = System.currentTimeMillis();
         	long timerFinal = timerEnd - timerStart;
-        	int inactiveHosts = endOctet - hostsCount;
+        	int inactiveHosts = hostsToScan - hostsCount;
         	int activeHosts = hostsToScan - inactiveHosts;
         	
         	if(activeHosts < 0) activeHosts = 0;
