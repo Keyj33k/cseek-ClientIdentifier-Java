@@ -106,7 +106,7 @@ SOFTWARE.
 
 <div align="center">
 
-### Tested on 5.15.0-47-generic-Ubuntu 
+### Tested on 5.15.0-47-generic-Ubuntu and Win10-21H2-Build-19044.1889
 
 </div>
 
