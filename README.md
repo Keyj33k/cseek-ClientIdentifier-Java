@@ -31,6 +31,7 @@ Local network recon tool: IPSweep With Additional Port Scanning Config.
 ## What's New
 - `feature` 0.0.4: added one line config
 - `bugfix` fixed miscalculation
+- `bugfix` fixed notification spam
 
 ## :rocket: Getting Started: 
 
