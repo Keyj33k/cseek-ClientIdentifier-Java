@@ -12,7 +12,7 @@ Local network recon tool: IPSweep With Additional Port Scanning Config.
 
 <div align="center">
 
-![version](https://img.shields.io/badge/Version-0.0.3-informational?style=flat&logo=&logoColor=white&color=red) ![stars](https://img.shields.io/github/stars/Keyj33k/NetHunt?style=social) ![forks](https://img.shields.io/github/forks/Keyj33k/NetHunt?label=Forks&logo=&logoColor=white&color=blue) ![languages](https://img.shields.io/github/languages/count/Keyj33k/NetHunt?style=social&logo=&logoColor=white&color=blue) ![issues](https://img.shields.io/github/last-commit/Keyj33k/NetHunt?style=flat&logo=&logoColor=white&color=blue) 
+![version](https://img.shields.io/badge/Version-0.0.4-informational?style=flat&logo=&logoColor=white&color=red) ![stars](https://img.shields.io/github/stars/Keyj33k/NetHunt?style=social) ![forks](https://img.shields.io/github/forks/Keyj33k/NetHunt?label=Forks&logo=&logoColor=white&color=blue) ![languages](https://img.shields.io/github/languages/count/Keyj33k/NetHunt?style=social&logo=&logoColor=white&color=blue) ![issues](https://img.shields.io/github/last-commit/Keyj33k/NetHunt?style=flat&logo=&logoColor=white&color=blue) 
 
 </div>
 
@@ -49,7 +49,17 @@ git clone https://github.com/Keyj33k/NetHunt.git
 ```
 4 ) `Run NetHunt` using the following command:
 ```
-java -jar NetHunt.jar <ipv4Addr(First Three Octets Only)> <minHost> <maxHost> <usePortScan(true/false)>
+java -jar NetHunt.jar
+```
+
+### Options/Usage
+```
+syntax: 	 java -jar NetHunt.jar <ipv4Addr(First Three Octets Only)> <minHost> <maxHost> <false>
+		       java -jar NetHunt.jar <ipv4Addr(First Three Octets Only)> <minHost> <maxHost> <true> <minPort> <maxPort>
+
+examples:	 java -jar NetHunt.jar 192.168.2 1 5 false
+				                    or
+		       java -jar NetHunt.jar 192.168.2 1 10 true 50 60
 ```
 
 <div align="center">
