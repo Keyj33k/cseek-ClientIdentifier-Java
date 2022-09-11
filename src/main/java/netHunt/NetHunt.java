@@ -23,10 +23,13 @@ public class NetHunt {
 	
 	private static final void syntaxInfo() {
 		System.out.println(new StringBuilder()
-			.append("NetHunt - Version 0.0.3\n")
+			.append("NetHunt - Version 0.0.4\n")
 			.append("------------------------\n\n")
-			.append("syntax: \t java -jar NetHunt.jar <ipv4Addr(First Three Octets Only)> <minHost> <maxHost> <portScanOption>\n\n")
-			.append("example:\t java -jar NetHunt.jar 192.168.2 1 5 true\n")
+			.append("syntax: \t java -jar NetHunt.jar <ipv4Addr(First Three Octets Only)> <minHost> <maxHost> <false>\n")
+			.append("\t\t java -jar NetHunt.jar <ipv4Addr(First Three Octets Only)> <minHost> <maxHost> <true> <minPort> <maxPort>\n\n")
+			.append("examples:\t java -jar NetHunt.jar 192.168.2 1 5 false\n")
+			.append("\t\t\t\tor\n")
+			.append("\t\t java -jar NetHunt.jar 192.168.2 1 10 true 50 60\n")
 		);
 		
 		System.exit(1);
@@ -62,39 +65,10 @@ public class NetHunt {
         	}
 	}
 	
-	private void portCheck(int minPort, int maxPort) {
-		if(minPort > maxPort) {
-			throw new InvalidConfigException();
-		} else if(minPort >= 65533 || minPort <= 0) {
-			throw new InvalidConfigException(String.format("port %d is invalid", minPort));
-		} else if(maxPort >= 65534 || maxPort <= 0) {
-			throw new InvalidConfigException(String.format("port %d is invalid", maxPort));
-		}
-	}
-	
-	public static void main(String args[]) throws InterruptedException, IOException {
+	private void start() {
 		Scanner userInput = new Scanner(System.in);
 		
 		try {
-			if(args.length != 4 || args[0].split("\\.").length != 3 || !args[3].matches("true|false")) syntaxInfo();
-			
-			// throw custom message at interruption 
-			Runtime.getRuntime().addShutdownHook(new Thread(() -> { System.out.println("\nnethunt done, exit"); }));
-			
-			NetHunt netHunt = new NetHunt(args[0]);
-			IPHunt ipHunt = new IPHunt(args[0]);
-			
-			int minHost = Integer.parseInt(args[1]);
-			int maxHost = Integer.parseInt(args[2]);
-			
-			if(minHost > maxHost || minHost <= 0 || minHost >= 253 || maxHost <= 0 || maxHost >= 253) throw new InvalidConfigException();
-			
-			System.out.println("NetHunt - Version 0.0.3\n");
-			netHunt.octetCheck();
-			Thread.sleep(500);
-			netHunt.outputFileCheck();
-			Thread.sleep(500);
-			
 			for(int count = 0; count < 4; count++) {
 				if(count >= 3) {
 					System.out.println("\nmismatching input three times, exit"); 
@@ -116,27 +90,63 @@ public class NetHunt {
 					System.out.println("\ninvalid input");
 				}
 			}
+		} catch(InputMismatchException exc) {
+			syntaxInfo();
+		} finally {
+			userInput.close();
+		}
+	}
+	
+	private void portCheck(int minPort, int maxPort) {
+	 	if(minPort > maxPort) {
+	 		throw new InvalidConfigException();
+	 	} else if(minPort >= 65533 || minPort <= 0) {
+	 		throw new InvalidConfigException(String.format("port %d is invalid", minPort));
+	 	} else if(maxPort >= 65534 || maxPort <= 0) {
+	 		throw new InvalidConfigException(String.format("port %d is invalid", maxPort));
+	 	}
+	}
+	
+	public static void main(String args[]) throws InterruptedException, IOException {
+		int minPort = 0;
+		int maxPort = 0;
+		
+		try {
+			NetHunt netHunt = new NetHunt(args[0]);
+			IPHunt ipHunt = new IPHunt(args[0]);
 			
-			if(!args[3].equals("false")) { // activate port scan
-				System.out.print("\n<minPort> <maxPort>: ");
+			if(args[3].equals("true") && args.length != 6 || args[0].split("\\.").length != 3) syntaxInfo();
+			if(args[3].equals("false") && args.length != 4 || args[0].split("\\.").length != 3) syntaxInfo();
+			
+			Runtime.getRuntime().addShutdownHook(new Thread(() -> { System.out.println("\nnethunt done, exit"); }));
+			
+			int minHost = Integer.parseInt(args[1]);
+			int maxHost = Integer.parseInt(args[2]);
+			
+			if(minHost > maxHost || minHost <= 0 || minHost >= 253 || maxHost <= 0 || maxHost >= 253) throw new InvalidConfigException();
+			
+			System.out.println("NetHunt - Version 0.0.4\n");
+			netHunt.octetCheck();
+			Thread.sleep(500);
+			netHunt.outputFileCheck();
+			Thread.sleep(500);
+			
+			if(args[3].equals("true")) {
+				minPort = Integer.parseInt(args[4]);
+				maxPort = Integer.parseInt(args[5]);
 				
-				int minPort = userInput.nextInt();
-				int maxPort = userInput.nextInt();
-				
-				netHunt.portCheck(minPort, maxPort);
+				netHunt.portCheck(Integer.parseInt(args[4]), Integer.parseInt(args[5]));
+				netHunt.start();
 				System.out.println("\nport scanning option set to true, the process may take some time ...");
 				ipHunt.addressReachability(minHost, maxHost, minPort, maxPort, true);
 			} else {
+				netHunt.start();
 				ipHunt.addressReachability(minHost, maxHost, 0, 0, false);
 			}
 		} catch(NumberFormatException exc) {
 			throw new InvalidConfigException();
 		} catch(ArrayIndexOutOfBoundsException exc) {
 			syntaxInfo();
-		} catch(InputMismatchException exc) {
-			throw new InvalidConfigException();	
-		} finally {
-			userInput.close();
 		}
 	}
 }
