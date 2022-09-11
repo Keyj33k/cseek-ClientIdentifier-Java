@@ -10,7 +10,7 @@ import java.net.SocketException;
 
 abstract class Hunt {
 	public String ipAddress;
-	private static String possibleService;
+	private static String possibleService = null;
 	private static int openPorts;
 	
 	public Hunt(String ipAddress) {
@@ -53,9 +53,9 @@ abstract class Hunt {
 	 * 
 	 */
 	public void scanPorts(int minPort, int maxPort, int lastOctet) throws IOException {
-		int portsToScan = (maxPort - minPort) + 1;
+		int portsToScan = maxPort - minPort;
 		
-		for(int port = minPort; port < maxPort + 1; port++) {
+		for(int port = minPort; port <= maxPort; port++) {
 			BufferedWriter writer = new BufferedWriter(new FileWriter("output/nethuntResults.txt", true));
 			String targetAddress = String.format("%s.%d", this.ipAddress, lastOctet);
 			Socket socket = new Socket();
@@ -66,9 +66,11 @@ abstract class Hunt {
 				
 				System.out.printf("\t%s, port %d, status: open\n", targetAddress, port);
 				if(possibleServices(port) != null) System.out.println(possibleServices(port));
-					
+				
 				writer.write(String.format("\t%s, port %d, status: open\n", targetAddress, port));
 				if(possibleServices(port) != null) writer.write(possibleServices(port) + "\n");
+				
+				possibleService = null; // reset to avoid invalid notification spamming
 			} catch(ConnectException exc) {
 			} catch(SocketException exc) {
 				exc.getMessage();
@@ -87,4 +89,3 @@ abstract class Hunt {
 		}
 	}
 }
-
