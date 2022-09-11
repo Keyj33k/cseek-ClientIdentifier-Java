@@ -52,14 +52,14 @@ git clone https://github.com/Keyj33k/NetHunt.git
 java -jar NetHunt.jar
 ```
 
-### Options/Usage
+## Options/Usage
 ```
 syntax: 	 java -jar NetHunt.jar <ipv4Addr(First Three Octets Only)> <minHost> <maxHost> <false>
-		       java -jar NetHunt.jar <ipv4Addr(First Three Octets Only)> <minHost> <maxHost> <true> <minPort> <maxPort>
+		 java -jar NetHunt.jar <ipv4Addr(First Three Octets Only)> <minHost> <maxHost> <true> <minPort> <maxPort>
 
 examples:	 java -jar NetHunt.jar 192.168.2 1 5 false
-				                    or
-		       java -jar NetHunt.jar 192.168.2 1 10 true 50 60
+				      or
+		 java -jar NetHunt.jar 192.168.2 1 10 true 50 60
 ```
 
 <div align="center">
