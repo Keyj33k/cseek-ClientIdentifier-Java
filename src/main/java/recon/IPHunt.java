@@ -51,12 +51,10 @@ public class IPHunt extends Hunt {
                 				"%s ( %s ): connected successfully, cTime=%s\n", pingAddr, 
                 				inetAddress.getCanonicalHostName(), currentDate
                 			));
-                			
                 			hostsCount++;
                 			isAddressReachable = true;
                 		} else {
                 			System.out.printf("%s: connection failed, cTime=%s\n", pingAddr, LocalTime.now().toString());
-                	
                 			isAddressReachable = false;
                 		}
            		} catch(UnknownHostException exc) {
@@ -69,7 +67,7 @@ public class IPHunt extends Hunt {
         	}
         	
         	// build statistics section
-        	int hostsToScan = endOctet - startOctet + 1;
+        	int hostsToScan = endOctet - startOctet;
         	long timerEnd = System.currentTimeMillis();
         	long timerFinal = timerEnd - timerStart;
         	int inactiveHosts = hostsToScan - hostsCount;
@@ -82,8 +80,8 @@ public class IPHunt extends Hunt {
         	
         	System.out.println("\n\n******************* statistics *******************");
         	System.out.printf(
-        		"total=%d, active=%d, inactive=%d, minHost=%s,\nmaxHost=%s, neededTime=%dms\n", 
-        		hostsToScan, activeHosts, inactiveHosts, minHost, maxHost, timerFinal
+        			"total=%d, active=%d, inactive=%d, minHost=%s,\nmaxHost=%s, neededTime=%dms\n", 
+        			hostsToScan, activeHosts, inactiveHosts, minHost, maxHost, timerFinal
         	);
 	}
 }
