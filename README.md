@@ -29,9 +29,7 @@ Local network recon tool: IPSweep With Additional Port Scanning Config.
 - store succeed results to a file for saving a detailed summary<br>
 
 ## What's New
-- `bugfix` scanning unedited address<br>
-- `quality fix` formatted results in output file<br>
-- `feature` if possible, displaying the domain of scanned addresses
+- `feature` 0.0.4: added one line config
 
 ## :rocket: Getting Started: 
 
