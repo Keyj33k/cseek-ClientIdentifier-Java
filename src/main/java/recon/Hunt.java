@@ -19,19 +19,19 @@ abstract class Hunt {
 	
 	private static String possibleServices(int port) {
 		if(port == 20 || port == 21) {
-			possibleService = String.format("\t\tport %d, possible FTP service detected!", port);
+			possibleService = " |\t\t ∟ possible service: FTP";
 		} else if(port == 22) {
-			possibleService = "\t\tport 22, possible SSH service detected!";
+			possibleService = " |\t\t ∟ possible service: SSH";
 		} else if(port == 23) {
-			possibleService = "\t\tport 23, possible Telnet service detected!";
+			possibleService = " |\t\t ∟  possible service: Telnet";
 		} else if(port == 25 || port == 456 || port == 587) {
-			possibleService = String.format("\t\tport %d, possible SMTP service detected!", port);
+			possibleService = " |\t\t ∟ possible service: SMTP";
 		} else if(port == 69) {
-			possibleService = "\t\tport 69, possible TFTP service detected!";
+			possibleService = " |\t\t ∟ possible service: TFTP";
 		} else if(port == 137 || port == 139 || port == 445) {
-			possibleService = String.format("\t\tport %d, possible SMB service detected!", port);
+			possibleService = " |\t\t ∟ possible service: SMB";
 		} else if(port == 80 || port == 443 || port == 8080) {
-			possibleService = String.format("\t\tport %d, possible HTTP/HTTPS service detected!", port);
+			possibleService = " |\t\t ∟ possible service: HTTP/HTTPS";
 		}
 		
 		return possibleService;
@@ -64,10 +64,10 @@ abstract class Hunt {
 				socket.connect(new InetSocketAddress(targetAddress, port));	
 				openPorts++;
 				
-				System.out.printf("\t%s, port %d, status: open\n", targetAddress, port);
+				System.out.printf(" |•••••• port %d, status: open\n", port);
 				if(possibleServices(port) != null) System.out.println(possibleServices(port));
 				
-				writer.write(String.format("\t%s, port %d, status: open\n", targetAddress, port));
+				writer.write(String.format(" |•••••• port %d, status: open\n", port));
 				if(possibleServices(port) != null) writer.write(possibleServices(port) + "\n");
 				
 				possibleService = null; // reset to avoid invalid notification spamming
@@ -83,9 +83,9 @@ abstract class Hunt {
 		int closedPorts = portsToScan - openPorts;
 		
 		if(portsToScan == closedPorts) {
-			System.out.printf("\tport scan done => %d ports scanned, all scanned ports are closed\n", portsToScan);
+			System.out.printf(" |••• port scan done:\n |\t ∟ %d ports scanned: all scanned ports are closed\n", portsToScan);
 		} else {
-			System.out.printf("\tport scan done => %d ports scanned, %d are open, %d ports closed\n", portsToScan, openPorts, closedPorts);
+			System.out.printf(" |••• port scan done:\n |\t ∟ %d ports scanned: %d are open, %d ports closed\n", portsToScan, openPorts, closedPorts);
 		}
 	}
 }
