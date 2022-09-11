@@ -44,13 +44,14 @@ public class IPHunt extends Hunt {
             		try {
             			if(inetAddress.isReachable(1000)) {
                 			System.out.printf(
-                				"%s ( %s ): connected successfully, cTime=%s\n", pingAddr, 
+                				"[+] %s ( %s ):\n |••• connected successfully, cTime=%s\n", pingAddr, 
                 				inetAddress.getCanonicalHostName(), LocalTime.now().toString()
                 			);
                 			outputWriter.write(String.format(
-                				"%s ( %s ): connected successfully, cTime=%s\n", pingAddr, 
+                				"\n%s ( %s ):\n |••• connected successfully, cTime=%s\n", pingAddr, 
                 				inetAddress.getCanonicalHostName(), currentDate
                 			));
+                			
                 			hostsCount++;
                 			isAddressReachable = true;
                 		} else {
@@ -80,8 +81,8 @@ public class IPHunt extends Hunt {
         	
         	System.out.println("\n\n******************* statistics *******************");
         	System.out.printf(
-        			"total=%d, active=%d, inactive=%d, minHost=%s,\nmaxHost=%s, neededTime=%dms\n", 
-        			hostsToScan, activeHosts, inactiveHosts, minHost, maxHost, timerFinal
+        		"total=%d, active=%d, inactive=%d, minHost=%s,\nmaxHost=%s, neededTime=%dms\n", 
+        		hostsToScan, activeHosts, inactiveHosts, minHost, maxHost, timerFinal
         	);
 	}
 }
