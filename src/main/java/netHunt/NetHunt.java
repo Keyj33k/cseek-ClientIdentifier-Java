@@ -1,10 +1,8 @@
 package netHunt;
 
-import java.util.Scanner;
 import java.util.logging.Logger;
 import java.lang.NumberFormatException;
 import java.lang.ArrayIndexOutOfBoundsException;
-import java.util.InputMismatchException;
 import java.io.File;
 import java.io.IOException;
 
@@ -65,38 +63,6 @@ public class NetHunt {
         	}
 	}
 	
-	private void start() {
-		Scanner userInput = new Scanner(System.in);
-		
-		try {
-			for(int count = 0; count < 4; count++) {
-				if(count >= 3) {
-					System.out.println("\nmismatching input three times, exit"); 
-					System.exit(1);
-				}
-				
-				System.out.print("\nstart scan? (y/n) ");
-				
-				String option = userInput.nextLine();
-				
-				if(option.length() != 1) {
-					System.out.println("\njust one character is necessary");
-				} else if(option.equals("y") || option.equals("Y")) {
-					break;
-				} else if(option.equals("n") || option.equals("N")) {
-					System.out.printf("\ngoodbye, %s\n", System.getProperty("user.name"));
-					System.exit(0);
-				} else {
-					System.out.println("\ninvalid input");
-				}
-			}
-		} catch(InputMismatchException exc) {
-			syntaxInfo();
-		} finally {
-			userInput.close();
-		}
-	}
-	
 	private void portCheck(int minPort, int maxPort) {
 	 	if(minPort > maxPort) {
 	 		throw new InvalidConfigException();
@@ -136,11 +102,9 @@ public class NetHunt {
 				maxPort = Integer.parseInt(args[5]);
 				
 				netHunt.portCheck(Integer.parseInt(args[4]), Integer.parseInt(args[5]));
-				netHunt.start();
 				System.out.println("\nport scanning option set to true, the process may take some time ...");
 				ipHunt.addressReachability(minHost, maxHost, minPort, maxPort, true);
 			} else {
-				netHunt.start();
 				ipHunt.addressReachability(minHost, maxHost, 0, 0, false);
 			}
 		} catch(NumberFormatException exc) {
