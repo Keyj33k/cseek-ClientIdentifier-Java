@@ -11,7 +11,7 @@ import java.net.SocketException;
 abstract class Hunt {
 	public String ipAddress;
 	private static String possibleService;
-	private static int portStatusCount;
+	private static int openPorts;
 	
 	public Hunt(String ipAddress) {
 	 	this.ipAddress = ipAddress;
@@ -53,9 +53,9 @@ abstract class Hunt {
 	 * 
 	 */
 	public void scanPorts(int minPort, int maxPort, int lastOctet) throws IOException {
-		int portsToScan = maxPort - minPort;
+		int portsToScan = (maxPort - minPort) + 1;
 		
-		for(int port = minPort; port < maxPort; port++) {
+		for(int port = minPort; port < maxPort + 1; port++) {
 			BufferedWriter writer = new BufferedWriter(new FileWriter("output/nethuntResults.txt", true));
 			String targetAddress = String.format("%s.%d", this.ipAddress, lastOctet);
 			Socket socket = new Socket();
@@ -64,25 +64,26 @@ abstract class Hunt {
 				socket.connect(new InetSocketAddress(targetAddress, port));	
 				System.out.printf("\t%s, port %d, status: open\n", targetAddress, port);
 				if(possibleServices(port) != null) System.out.println(possibleServices(port));
+					
 				writer.write(String.format("\t%s, port %d, status: open\n", targetAddress, port));
 				if(possibleServices(port) != null) writer.write(possibleServices(port) + "\n");
+				openPorts++;
 			} catch(ConnectException exc) {
-				portStatusCount++;
 			} catch(SocketException exc) {
-				portStatusCount++;
+				exc.getMessage();
 			} finally {
 				socket.close();
 				writer.close();
 			}
 		}
 		
-		if(portsToScan == portStatusCount) {
+		int closedPorts = portsToScan - openPorts;
+		
+		if(portsToScan == closedPorts) {
 			System.out.printf("\tport scan done => %d ports scanned, all scanned ports are closed\n", portsToScan);
 		} else {
-			System.out.printf("\tport scan done => %d ports scanned, %d ports are closed\n", portsToScan, portStatusCount);
+			System.out.printf("\tport scan done => %d ports scanned, %d are open, %d ports closed\n", portsToScan, openPorts, closedPorts);
 		}
 	}
 }
-
-
 
