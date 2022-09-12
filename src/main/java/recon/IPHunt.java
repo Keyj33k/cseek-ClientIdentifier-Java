@@ -35,7 +35,7 @@ public class IPHunt extends Hunt {
 		long timerStart = System.currentTimeMillis();
 		int scanCount = endOctet - startOctet + 1; 
 
-        	System.out.printf("\nstart scanning at %s\n\n", currentDate);
+        	System.out.printf("\nstart scanning at %s\nFollow the white rabbit.\n\n", currentDate);
 
         	for(int octet = startOctet; octet < endOctet + 1; octet++) {
         		BufferedWriter outputWriter = new BufferedWriter(new FileWriter("output/nethuntResults.txt", true));
@@ -47,11 +47,11 @@ public class IPHunt extends Hunt {
             		try {
             			if(inetAddress.isReachable(1000)) {
                 			System.out.printf(
-                				"[+] %s ( %s )\n |\t ∟ connected successfully, count=%d, time=%s\n", pingAddr, 
+                				"[+] %s ( %s ):\n |  connected successfully, count=%d, time=%s\n", pingAddr, 
                 				inetAddress.getCanonicalHostName(), scanCount, LocalTime.now().toString()
                 			);
                 			outputWriter.write(String.format(
-                				"\n%s ( %s )\n |\t ∟ connected successfully, count=%d, time=%s\n", pingAddr, 
+                				"\n%s ( %s ):\n |  connected successfully, count=%d, time=%s\n", pingAddr, 
                 				inetAddress.getCanonicalHostName(), scanCount, currentDate
                 			));
                 			
@@ -82,6 +82,8 @@ public class IPHunt extends Hunt {
         	
         	if(activeHosts < 0) activeHosts = 0;
         	if(inactiveHosts < 0) inactiveHosts = 0;
+        	if(hostsToScan < 10) hostsToScan++;
+        	if(inactiveHosts < 10) inactiveHosts++;
         	
         	String minHost = String.format("%s.%d", ipAddress, startOctet);
         	String maxHost = String.format("%s.%d", ipAddress, endOctet);
