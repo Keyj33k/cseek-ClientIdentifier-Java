@@ -83,15 +83,15 @@ abstract class Hunt {
 		int closedPorts = portsToScan - openPorts;
 		
 		if(portsToScan == closedPorts) {
-			System.out.printf(" | port scan done:\n |\t ∟ %d ports scanned: all scanned ports are closed\n", portsToScan);
+			System.out.printf(" | port scan done\n |\t ∟ %d ports scanned: all scanned ports are closed\n", portsToScan);
 		} else if(openPorts == 1) {
 			System.out.printf(
-				" | port scan done:\n |\t ∟ %d ports scanned: %d is open, %d ports closed\n", 
+				" | port scan done\n |\t ∟ %d ports scanned: %d is open, %d ports closed\n", 
 				portsToScan, openPorts, closedPorts
 			);
 		} else {
 			System.out.printf(
-				" | port scan done:\n |\t ∟ %d ports scanned: %d are open, %d ports closed\n", 
+				" | port scan done\n |\t ∟ %d ports scanned: %d are open, %d ports closed\n", 
 				portsToScan, openPorts, closedPorts
 			);
 		}
