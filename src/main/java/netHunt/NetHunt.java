@@ -81,8 +81,12 @@ public class NetHunt {
 			NetHunt netHunt = new NetHunt(args[0]);
 			IPHunt ipHunt = new IPHunt(args[0]);
 			
-			if(args[3].equals("true") && args.length != 6 || args[0].split("\\.").length != 3) syntaxInfo();
-			if(args[3].equals("false") && args.length != 4 || args[0].split("\\.").length != 3) syntaxInfo();
+			if(args[3].equals("true") || args[3].equals("TRUE")) {
+				if(args.length != 6 || args[0].split("\\.").length != 3) syntaxInfo();
+			}
+			if(args[3].equals("false") || args[3].equals("FALSE")) {
+				if(args.length != 4 || args[0].split("\\.").length != 3) syntaxInfo();
+			}
 			
 			Runtime.getRuntime().addShutdownHook(new Thread(() -> { System.out.println("\nnethunt done, exit"); }));
 			
@@ -97,7 +101,7 @@ public class NetHunt {
 			netHunt.outputFileCheck();
 			Thread.sleep(500);
 			
-			if(args[3].equals("true")) {
+			if(args[3].equals("true") || args[3].equals("TRUE")) {
 				minPort = Integer.parseInt(args[4]);
 				maxPort = Integer.parseInt(args[5]);
 				
