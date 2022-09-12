@@ -81,12 +81,11 @@ public class NetHunt {
 			NetHunt netHunt = new NetHunt(args[0]);
 			IPHunt ipHunt = new IPHunt(args[0]);
 			
-			if(args[3].equals("true") || args[3].equals("TRUE")) {
-				if(args.length != 6 || args[0].split("\\.").length != 3) syntaxInfo();
-			}
-			if(args[3].equals("false") || args[3].equals("FALSE")) {
-				if(args.length != 4 || args[0].split("\\.").length != 3) syntaxInfo();
-			}
+			boolean activatePortScan = Boolean.parseBoolean(args[3]);
+			if(activatePortScan == true && args.length != 6 || args[0].split("\\.").length != 3) syntaxInfo();
+			
+			boolean deactivatePortScan = Boolean.parseBoolean(args[3]);
+			if(deactivatePortScan == false && args.length != 4 || args[0].split("\\.").length != 3) syntaxInfo();
 			
 			Runtime.getRuntime().addShutdownHook(new Thread(() -> { System.out.println("\nnethunt done, exit"); }));
 			
