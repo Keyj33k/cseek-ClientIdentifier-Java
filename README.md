@@ -54,12 +54,12 @@ java -jar NetHunt.jar
 
 ## Options/Usage
 ```
-syntax: 	 java -jar NetHunt.jar <ipv4Addr(First Three Octets Only)> <minHost> <maxHost> false
-		 java -jar NetHunt.jar <ipv4Addr(First Three Octets Only)> <minHost> <maxHost> true <minPort> <maxPort>
+syntax: 	 java -jar NetHunt.jar <ipv4Addr(First Three Octets Only)> <minHost> <maxHost> disable
+		 java -jar NetHunt.jar <ipv4Addr(First Three Octets Only)> <minHost> <maxHost> enable <minPort> <maxPort>
 
-examples:	 java -jar NetHunt.jar 192.168.2 1 5 false
+examples:	 java -jar NetHunt.jar 192.168.2 1 5 disable
 				      or
-		 java -jar NetHunt.jar 192.168.2 1 10 true 50 60
+		 java -jar NetHunt.jar 192.168.2 1 10 enable 50 60
 ```
 
 <div align="center">
