@@ -23,7 +23,7 @@ abstract class Hunt {
 		} else if(port == 22) {
 			possibleService = " |\t\t ∟ possible service: SSH";
 		} else if(port == 23) {
-			possibleService = " |\t\t ∟  possible service: Telnet";
+			possibleService = " |\t\t ∟ possible service: Telnet";
 		} else if(port == 25 || port == 456 || port == 587) {
 			possibleService = " |\t\t ∟ possible service: SMTP";
 		} else if(port == 69) {
