@@ -12,8 +12,8 @@ public class IPHunt extends Hunt {
 	public IPHunt(String ipAddress) {
 		super(ipAddress);
 	}
-	private boolean isAddressReachable;
-	private int hostsCount;
+	private static boolean isAddressReachable;
+	private static int hostsCount;
 	
 	/**
 	 * 
@@ -33,6 +33,7 @@ public class IPHunt extends Hunt {
 	public void addressReachability(int startOctet, int endOctet, int minPort, int maxPort, boolean portScan) throws IOException {
 		Date currentDate = new Date();
 		long timerStart = System.currentTimeMillis();
+		int scanCount = endOctet - startOctet + 1; 
 
         	System.out.printf("\nstart scanning at %s\n\n", currentDate);
 
@@ -40,22 +41,26 @@ public class IPHunt extends Hunt {
         		BufferedWriter outputWriter = new BufferedWriter(new FileWriter("output/nethuntResults.txt", true));
         		String pingAddr = String.format("%s.%d", ipAddress, octet);
         		InetAddress inetAddress = InetAddress.getByName(pingAddr);
+			
+        		scanCount--;
         	
             		try {
             			if(inetAddress.isReachable(1000)) {
                 			System.out.printf(
-                				"[+] %s ( %s ):\n |••• connected successfully, cTime=%s\n", pingAddr, 
-                				inetAddress.getCanonicalHostName(), LocalTime.now().toString()
+                				"[+] %s ( %s ):\n |••• connected successfully, count=%d, time=%s\n", pingAddr, 
+                				inetAddress.getCanonicalHostName(), scanCount, LocalTime.now().toString()
                 			);
                 			outputWriter.write(String.format(
-                				"\n%s ( %s ):\n |••• connected successfully, cTime=%s\n", pingAddr, 
-                				inetAddress.getCanonicalHostName(), currentDate
+                				"\n%s ( %s ):\n |••• connected successfully, count=%d, time=%s\n", pingAddr, 
+                				inetAddress.getCanonicalHostName(), scanCount, currentDate
                 			));
-                			
                 			hostsCount++;
                 			isAddressReachable = true;
                 		} else {
-                			System.out.printf("%s: connection failed, cTime=%s\n", pingAddr, LocalTime.now().toString());
+                			System.out.printf(
+                				"%s: connection failed, count=%d, time=%s\n", pingAddr, scanCount, 
+                				LocalTime.now().toString()
+                			);
                 			isAddressReachable = false;
                 		}
            		} catch(UnknownHostException exc) {
