@@ -93,10 +93,14 @@ public class NetHunt {
 			if(minHost > maxHost || minHost <= 0 || minHost >= 253 || maxHost <= 0 || maxHost >= 253) throw new InvalidConfigException();
 			
 			System.out.println("NetHunt - Version 0.0.5\n");
+			System.out.println("////////////////////////// CONFIG CHECK //////////////////////////\n");
+			
 			netHunt.octetCheck();
 			Thread.sleep(500);
 			netHunt.outputFileCheck();
 			Thread.sleep(500);
+			
+			System.out.println("\n////////////////////////// SCAN BEGINS ///////////////////////////\n");
 			
 			if(args[3].equals("enable")) {
 				minPort = Integer.parseInt(args[4]);
