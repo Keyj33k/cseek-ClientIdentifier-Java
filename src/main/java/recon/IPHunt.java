@@ -82,8 +82,6 @@ public class IPHunt extends Hunt {
         	
         	if(activeHosts < 0) activeHosts = 0;
         	if(inactiveHosts < 0) inactiveHosts = 0;
-        	if(hostsToScan < 10) hostsToScan++;
-        	if(inactiveHosts < 10) inactiveHosts++;
         	
         	String minHost = String.format("%s.%d", ipAddress, startOctet);
         	String maxHost = String.format("%s.%d", ipAddress, endOctet);
