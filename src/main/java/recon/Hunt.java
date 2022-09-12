@@ -19,19 +19,19 @@ abstract class Hunt {
 	
 	private static String possibleServices(int port) {
 		if(port == 20 || port == 21) {
-			possibleService = " |\t\t ∟ possible service: FTP";
+			possibleService = " |\t\t\t ∟ possible service: FTP";
 		} else if(port == 22) {
-			possibleService = " |\t\t ∟ possible service: SSH";
+			possibleService = " |\t\t\t ∟ possible service: SSH";
 		} else if(port == 23) {
-			possibleService = " |\t\t ∟ possible service: Telnet";
+			possibleService = " |\t\t\t ∟ possible service: Telnet";
 		} else if(port == 25 || port == 456 || port == 587) {
-			possibleService = " |\t\t ∟ possible service: SMTP";
+			possibleService = " |\t\t\t ∟ possible service: SMTP";
 		} else if(port == 69) {
-			possibleService = " |\t\t ∟ possible service: TFTP";
+			possibleService = " |\t\t\t ∟ possible service: TFTP";
 		} else if(port == 137 || port == 139 || port == 445) {
-			possibleService = " |\t\t ∟ possible service: SMB";
+			possibleService = " |\t\t\t ∟ possible service: SMB";
 		} else if(port == 80 || port == 443 || port == 8080) {
-			possibleService = " |\t\t ∟ possible service: HTTP/HTTPS";
+			possibleService = " |\t\t\t ∟ possible service: HTTP/HTTPS";
 		}
 		
 		return possibleService;
@@ -64,10 +64,10 @@ abstract class Hunt {
 				socket.connect(new InetSocketAddress(targetAddress, port));	
 				openPorts++;
 				
-				System.out.printf(" |•••••• port %d, status: open\n", port);
+				System.out.printf(" |\t\t ∟ port %d, status: open\n", port);
 				if(possibleServices(port) != null) System.out.println(possibleServices(port));
 				
-				writer.write(String.format(" |•••••• port %d, status: open\n", port));
+				writer.write(String.format(" |\t\t ∟ port %d, status: open\n", port));
 				if(possibleServices(port) != null) writer.write(possibleServices(port) + "\n");
 				
 				possibleService = null; // reset to avoid invalid notification spamming
@@ -83,15 +83,15 @@ abstract class Hunt {
 		int closedPorts = portsToScan - openPorts;
 		
 		if(portsToScan == closedPorts) {
-			System.out.printf(" |••• port scan done:\n |\t ∟ %d ports scanned: all scanned ports are closed\n", portsToScan);
+			System.out.printf(" | port scan done:\n |\t ∟ %d ports scanned: all scanned ports are closed\n", portsToScan);
 		} else if(openPorts == 1) {
 			System.out.printf(
-				" |••• port scan done:\n |\t ∟ %d ports scanned: %d is open, %d ports closed\n", 
+				" | port scan done:\n |\t ∟ %d ports scanned: %d is open, %d ports closed\n", 
 				portsToScan, openPorts, closedPorts
 			);
 		} else {
 			System.out.printf(
-				" |••• port scan done:\n |\t ∟ %d ports scanned: %d are open, %d ports closed\n", 
+				" | port scan done:\n |\t ∟ %d ports scanned: %d are open, %d ports closed\n", 
 				portsToScan, openPorts, closedPorts
 			);
 		}
