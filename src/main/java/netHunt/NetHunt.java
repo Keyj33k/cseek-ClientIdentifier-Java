@@ -21,13 +21,13 @@ public class NetHunt {
 	
 	private static final void syntaxInfo() {
 		System.out.println(new StringBuilder()
-			.append("NetHunt - Version 0.0.4\n")
+			.append("NetHunt - Version 0.0.5\n")
 			.append("------------------------\n\n")
-			.append("syntax: \t java -jar NetHunt.jar <ipv4Addr(First Three Octets Only)> <minHost> <maxHost> false\n")
-			.append("\t\t java -jar NetHunt.jar <ipv4Addr(First Three Octets Only)> <minHost> <maxHost> true <minPort> <maxPort>\n\n")
-			.append("examples:\t java -jar NetHunt.jar 192.168.2 1 5 false\n")
+			.append("syntax: \t java -jar NetHunt.jar <ipv4Addr(First Three Octets Only)> <minHost> <maxHost> disable\n")
+			.append("\t\t java -jar NetHunt.jar <ipv4Addr(First Three Octets Only)> <minHost> <maxHost> enable <minPort> <maxPort>\n\n")
+			.append("examples:\t java -jar NetHunt.jar 192.168.2 1 5 disable\n")
 			.append("\t\t\t\tor\n")
-			.append("\t\t java -jar NetHunt.jar 192.168.2 1 10 true 50 60\n")
+			.append("\t\t java -jar NetHunt.jar 192.168.2 1 10 enable 50 60\n")
 		);
 		
 		System.exit(1);
@@ -81,11 +81,9 @@ public class NetHunt {
 			NetHunt netHunt = new NetHunt(args[0]);
 			IPHunt ipHunt = new IPHunt(args[0]);
 			
-			boolean activatePortScan = Boolean.parseBoolean(args[3]);
-			if(activatePortScan == true && args.length != 6 || args[0].split("\\.").length != 3) syntaxInfo();
-			
-			boolean deactivatePortScan = Boolean.parseBoolean(args[3]);
-			if(deactivatePortScan == false && args.length != 4 || args[0].split("\\.").length != 3) syntaxInfo();
+			if(!args[3].equals("enable") && !args[3].equals("disable")) syntaxInfo();
+			if(args[3].equals("enable") && args.length != 6 || args[0].split("\\.").length != 3) syntaxInfo();
+			if(args[3].equals("disable") && args.length != 4 || args[0].split("\\.").length != 3) syntaxInfo();
 			
 			Runtime.getRuntime().addShutdownHook(new Thread(() -> { System.out.println("\nnethunt done, exit"); }));
 			
@@ -94,18 +92,18 @@ public class NetHunt {
 			
 			if(minHost > maxHost || minHost <= 0 || minHost >= 253 || maxHost <= 0 || maxHost >= 253) throw new InvalidConfigException();
 			
-			System.out.println("NetHunt - Version 0.0.4\n");
+			System.out.println("NetHunt - Version 0.0.5\n");
 			netHunt.octetCheck();
 			Thread.sleep(500);
 			netHunt.outputFileCheck();
 			Thread.sleep(500);
 			
-			if(args[3].equals("true") || args[3].equals("TRUE")) {
+			if(args[3].equals("enable")) {
 				minPort = Integer.parseInt(args[4]);
 				maxPort = Integer.parseInt(args[5]);
 				
 				netHunt.portCheck(Integer.parseInt(args[4]), Integer.parseInt(args[5]));
-				logger.info("port scanning option set to true, the process may take some time");
+				logger.info("port scanning enabled, the process may take some time");
 				ipHunt.addressReachability(minHost, maxHost, minPort, maxPort, true);
 			} else {
 				ipHunt.addressReachability(minHost, maxHost, 0, 0, false);
