@@ -41,19 +41,20 @@ public class IPHunt extends Hunt {
         		BufferedWriter outputWriter = new BufferedWriter(new FileWriter("output/nethuntResults.txt", true));
         		String pingAddr = String.format("%s.%d", ipAddress, octet);
         		InetAddress inetAddress = InetAddress.getByName(pingAddr);
-			
+        		
         		scanCount--;
         	
             		try {
             			if(inetAddress.isReachable(1000)) {
                 			System.out.printf(
-                				"[+] %s ( %s ):\n |••• connected successfully, count=%d, time=%s\n", pingAddr, 
+                				"[+] %s ( %s ):\n |\t connected successfully, count=%d, time=%s\n", pingAddr, 
                 				inetAddress.getCanonicalHostName(), scanCount, LocalTime.now().toString()
                 			);
                 			outputWriter.write(String.format(
-                				"\n%s ( %s ):\n |••• connected successfully, count=%d, time=%s\n", pingAddr, 
+                				"\n%s ( %s ):\n |\t connected successfully, count=%d, time=%s\n", pingAddr, 
                 				inetAddress.getCanonicalHostName(), scanCount, currentDate
                 			));
+                			
                 			hostsCount++;
                 			isAddressReachable = true;
                 		} else {
