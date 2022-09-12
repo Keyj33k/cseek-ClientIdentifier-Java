@@ -71,7 +71,7 @@ examples:	 java -jar NetHunt.jar 192.168.2 1 5 disable
 ## 🎬 NetHunt Demo
 <div align="center">
   
-![demo](https://github.com/Keyj33k/NetHunt/blob/main/img/HuntDemo.gif?raw=true)
+![demo](https://github.com/Keyj33k/NetHunt/blob/main/img/netHuntDemo.gif?raw=true)
   
 </div>
 
