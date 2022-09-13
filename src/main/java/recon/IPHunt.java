@@ -35,7 +35,7 @@ public class IPHunt extends Hunt {
 		long timerStart = System.currentTimeMillis();
 		int scanCount = endOctet - startOctet + 1; 
 
-        	System.out.printf("\nstart scanning at %s\nFollow the white rabbit.\n\n", currentDate);
+        	System.out.printf("\nstart scanning at %s\n\n", currentDate);
 
         	for(int octet = startOctet; octet < endOctet + 1; octet++) {
         		BufferedWriter outputWriter = new BufferedWriter(new FileWriter("output/nethuntResults.txt", true));
