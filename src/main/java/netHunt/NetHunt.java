@@ -100,16 +100,16 @@ public class NetHunt {
 			netHunt.outputFileCheck();
 			Thread.sleep(500);
 			
-			System.out.println("\n////////////////////////// SCAN BEGINS ///////////////////////////\n");
-			
 			if(args[3].equals("enable")) {
 				minPort = Integer.parseInt(args[4]);
 				maxPort = Integer.parseInt(args[5]);
 				
 				netHunt.portCheck(Integer.parseInt(args[4]), Integer.parseInt(args[5]));
 				logger.info("port scanning enabled, the process may take some time");
+				System.out.println("\n////////////////////// EXTENDED SCAN BEGINS //////////////////////");
 				ipHunt.addressReachability(minHost, maxHost, minPort, maxPort, true);
 			} else {
+				System.out.println("\n/////////////////////// BASIC SCAN BEGINS ////////////////////////");
 				ipHunt.addressReachability(minHost, maxHost, 0, 0, false);
 			}
 		} catch(NumberFormatException exc) {
