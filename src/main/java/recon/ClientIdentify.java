@@ -8,8 +8,8 @@ import java.net.UnknownHostException;
 import java.time.LocalTime;
 import java.util.Date;
 
-public class IPHunt extends Hunt {
-	public IPHunt(String ipAddress) {
+public class ClientIdentify extends PortScan {
+	public ClientIdentify(String ipAddress) {
 		super(ipAddress);
 	}
 	private static boolean isAddressReachable;
