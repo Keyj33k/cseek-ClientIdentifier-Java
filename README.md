@@ -1,12 +1,12 @@
 <div align="center">
 
-# NetHunt :mag:
+# cseek :mag:
 
 </div>
 
 <div align="center">
 
-Local network recon tool: IPSweep With Additional Port Scanning Config. 
+Network Recon Tool: IPSweep With Additional Port Scanning Config. 
 
 </div>
 
@@ -18,20 +18,15 @@ Local network recon tool: IPSweep With Additional Port Scanning Config.
 
 <div align="center">
 
-<a href="https://github.com/Keyj33k/NetHunt/archive/refs/heads/main.zip"><img src="https://github.com/Keyj33k/NetHunt/blob/main/img/nethunt.png?raw=true" alt="banner"/></a>
+<a href="https://github.com/Keyj33k/cseek-ClientIdentifier/archive/refs/heads/main.zip"><img src="https://github.com/Keyj33k/cseek-ClientIdentifier/blob/main/img/cseek.png?raw=true" alt="banner"/></a>
   
 </div>
 
-## NetHunts Mission
+## cseekers Mission
 - scan address range in local network to detect reachable devices<br>
 - optional port scan config for live hosts to work faster and more efficient<br>
 - displays a message when a port is open which is usually vulnerable<br>
 - store succeed results to a file for saving a detailed summary<br>
-
-## What's New
-- `feature` exchanged port scanning query
-- `feature` added scan count
-- `bugfix` fixed miscalculation in statistics section
 
 ## :rocket: Getting Started: 
 
@@ -45,33 +40,33 @@ sudo apt-get install openjdk-18-jdk
 ```
 3 ) Clone the repository:
 ```
-git clone https://github.com/Keyj33k/NetHunt.git
+git clone https://github.com/Keyj33k/cseek-ClientIdentifier.git
 ```
-4 ) `Run NetHunt` using the following command:
+4 ) `Run cseek` using the following command:
 ```
-java -jar NetHunt.jar
+java -jar cseek.jar
 ```
 
 ## Options/Usage
 ```
-syntax: 	 java -jar NetHunt.jar <ipv4Addr(First Three Octets Only)> <minHost> <maxHost> disable
-		 java -jar NetHunt.jar <ipv4Addr(First Three Octets Only)> <minHost> <maxHost> enable <minPort> <maxPort>
+syntax: 	 java -jar cseek.jar <ipv4Addr(First Three Octets Only)> <minHost> <maxHost> disable
+		 java -jar cseek.jar <ipv4Addr(First Three Octets Only)> <minHost> <maxHost> enable <minPort> <maxPort>
 
-examples:	 java -jar NetHunt.jar 192.168.2 1 5 disable
+examples:	 java -jar cseek.jar 192.168.2 1 5 disable
 				      or
-		 java -jar NetHunt.jar 192.168.2 1 10 enable 50 60
+		 java -jar cseek.jar 192.168.2 1 10 enable 50 60
 ```
 
 <div align="center">
   
-### The Output Will Be Stored In A Text File: `/output/nethuntResults.txt`
+### The Output Will Be Stored In A Text File: `/output/cseekResults.txt`
 
 </div>
 
-## 🎬 NetHunt Demo
+## 🎬 cseek Demo
 <div align="center">
   
-![demo](https://github.com/Keyj33k/NetHunt/blob/main/img/netHuntDemo.gif?raw=true)
+![demo](https://github.com/Keyj33k/cseek-ClientIdentifier/blob/main/img/cseekDemo.gif?raw=true)
   
 </div>
 
@@ -81,12 +76,12 @@ current pentest. It's a really good method to getting started, but for bigger ra
 impossible to keep the overview. If the Bash script located active devices, I had to do a port scan on <br> 
 each hosts separately. While this process, the workspace looked very messy and the overview was lost quickly. <br> 
 In a nutshell, I wanted to create a tool that would do all these things itself and simply save all active <br> 
-devices and their associated open ports to one file. If NetHunt stored the results, I know where i need to begin <br>
+devices and their associated open ports to one file. If cseek stored the results, I know where i need to begin <br>
 my next steps without loosing much time and keep a clear workspace too. 
 
 ## Feedback And Bug Report
 
-If you found a bug, or wanna start a discussion, please use ![Github issues](https://github.com/Keyj33k/NetHunt/issues). You are also invited to <br>
+If you found a bug, or wanna start a discussion, please use ![Github issues](https://github.com/Keyj33k/cseek-ClientIdentifier/issues). You are also invited to <br>
 send an email to the following address: `nomotikag33n@gmail.com`
 
 ## LICENSE
