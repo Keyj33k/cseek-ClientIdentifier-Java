@@ -8,12 +8,12 @@ import java.io.IOException;
 import java.net.ConnectException;
 import java.net.SocketException;
 
-abstract class Hunt {
+abstract class PortScan {
 	public String ipAddress;
 	private static String possibleService = null;
 	private static int openPorts = 0;
 	
-	public Hunt(String ipAddress) {
+	public PortScan(String ipAddress) {
 	 	this.ipAddress = ipAddress;
 	}
 	
@@ -56,7 +56,7 @@ abstract class Hunt {
 		int portsToScan = maxPort - minPort;
 		
 		for(int port = minPort; port <= maxPort; port++) {
-			BufferedWriter writer = new BufferedWriter(new FileWriter("output/nethuntResults.txt", true));
+			BufferedWriter writer = new BufferedWriter(new FileWriter("output/cseekResults.txt", true));
 			String targetAddress = String.format("%s.%d", this.ipAddress, lastOctet);
 			Socket socket = new Socket();
 			
@@ -99,3 +99,5 @@ abstract class Hunt {
 		openPorts = 0; // reset to avoid invalid result calculations
 	}
 }
+
+
