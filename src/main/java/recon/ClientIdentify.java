@@ -38,7 +38,7 @@ public class ClientIdentify extends PortScan {
         	System.out.printf("\nstart scanning at %s\n\n", currentDate);
 
         	for(int octet = startOctet; octet < endOctet + 1; octet++) {
-        		BufferedWriter outputWriter = new BufferedWriter(new FileWriter("output/nethuntResults.txt", true));
+        		BufferedWriter outputWriter = new BufferedWriter(new FileWriter("output/cseekResults.txt", true));
         		String pingAddr = String.format("%s.%d", ipAddress, octet);
         		InetAddress inetAddress = InetAddress.getByName(pingAddr);
         		
