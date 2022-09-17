@@ -30,8 +30,10 @@ abstract class PortScan {
 			possibleService = " |\t\t * possible service: TFTP";
 		} else if(port == 137 || port == 139 || port == 445) {
 			possibleService = " |\t\t * possible service: SMB";
-		} else if(port == 80 || port == 443 || port == 8080) {
-			possibleService = " |\t\t * possible service: HTTP/HTTPS";
+		} else if(port == 443) {
+			possibleService = " |\t\t * possible service: HTTPS";
+		} else if(port == 80 || port == 8080) {
+			possibleService = " |\t\t * possible service: HTTP";
 		}
 		
 		return possibleService;
