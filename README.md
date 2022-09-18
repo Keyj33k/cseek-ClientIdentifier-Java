@@ -40,7 +40,7 @@ sudo apt-get install openjdk-18-jdk
 ```
 3 ) Clone the repository:
 ```
-git clone https://github.com/Keyj33k/cseek-ClientIdentifier.git
+git clone https://github.com/Keyj33k/cseek-ClientIdentifier-Java.git
 ```
 4 ) `Run cseek` using the following command:
 ```
