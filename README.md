@@ -66,7 +66,7 @@ my next steps without loosing much time and keep a clear workspace too.
 ## Feedback And Bug Report
 
 If you found a bug, or wanna start a discussion, please use ![Github issues](https://github.com/Keyj33k/cseek-ClientIdentifier/issues). You are also invited to <br>
-send an email to the following address: `nomotikag33n@gmail.com`
+send an email to the following address: `K3yjeek@proton.me`
 
 ## LICENSE
 ```
